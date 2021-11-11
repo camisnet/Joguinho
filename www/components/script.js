@@ -1,6 +1,23 @@
  window.onload = function(){
    inicioJogo();
 
+   function config(){
+     let claro = {
+     canva:"#F8F8FF",
+     body:"#E6E6FA",
+     botao:"#000"
+   }
+      localStorage.setItem("claro", JSON.stringify(claro));
+
+  let escuro = {
+     canva:"#CCC",
+     body:"#B0E0E6	",
+     botao:"#fff"
+   }
+      localStorage.setItem("escuro", JSON.stringify(escuro));
+  }
+config();
+
   document.querySelector("#direita").addEventListener("click", function(){
     direita();
     setTimeout(parar, 1000);
@@ -20,6 +37,36 @@
     descer();
     setTimeout(parar, 1000);
   });
+
+  document.querySelector("#claro").addEventListener("click", function(){
+
+    let tema =JSON.parse(localStorage.getItem("claro"));
+    document.querySelector("canvas").style.background = tema.canva;
+    document.querySelector("body").style.background = tema.body;
+
+    const botao = document.querySelectorAll(".direcao");
+
+  Array.prototype.filter.call(botao, function(botao) {
+    botao.style.color = tema.botao;
+  });
+
+  });
+
+    document.querySelector("#escuro").addEventListener("click", function(){
+
+    let tema =JSON.parse(localStorage.getItem("escuro"));
+    document.querySelector("canvas").style.background = tema.canva;
+    document.querySelector("body").style.background = tema.body;
+
+    const botao = document.querySelectorAll(".direcao");
+
+  Array.prototype.filter.call(botao, function(botao) {
+    botao.style.color = tema.botao;
+  });
+
+});
+
+
 
  }
  var personagemObj;
